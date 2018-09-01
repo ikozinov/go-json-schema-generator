@@ -57,6 +57,7 @@ type property struct {
 	Properties           map[string]*property `json:"properties,omitempty"`
 	Required             []string             `json:"required,omitempty"`
 	AdditionalProperties bool                 `json:"additionalProperties,omitempty"`
+	Title                string               `json:"title,omitempty"`
 	Description          string               `json:"description,omitempty"`
 	AnyOf                []*property          `json:"anyOf,omitempty"`
 
@@ -153,6 +154,7 @@ func (p *property) readFromStruct(t reflect.Type) {
 
 		p.Properties[name] = &property{}
 		p.Properties[name].read(field.Type)
+		p.Properties[name].Title = field.Tag.Get("title")
 		p.Properties[name].Description = field.Tag.Get("description")
 		p.Properties[name].addValidatorsFromTags(&field.Tag)
 

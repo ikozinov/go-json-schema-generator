@@ -71,7 +71,7 @@ func (self *propertySuite) TestLoad(c *C) {
 
 type ExampleJSONBasicWithTag struct {
 	Bool         bool    `json:"test"`
-	String       string  `json:"string" description:"blah" minLength:"3" maxLength:"10" pattern:"m{3,10}"`
+	String       string  `json:"string" title:"some" description:"blah" minLength:"3" maxLength:"10" pattern:"m{3,10}"`
 	Const        string  `json:"const" const:"blah"`
 	Float        float32 `json:"float" min:"1.5" max:"42"`
 	Int          int64   `json:"int" exclusiveMin:"-10" exclusiveMax:"0"`
@@ -94,6 +94,7 @@ func (self *propertySuite) TestLoadWithTag(c *C) {
 					MinLength:   int64ptr(3),
 					MaxLength:   int64ptr(10),
 					Pattern:     "m{3,10}",
+					Title:       "some",
 					Description: "blah",
 				},
 				"const": &property{
